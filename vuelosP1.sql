@@ -12,7 +12,7 @@ CREATE TABLE ubicaciones (
 	pais VARCHAR(45) NOT NULL,
 	estado VARCHAR(45) NOT NULL,
 	ciudad VARCHAR(45) NOT NULL,
-	huso INT NOT NULL,
+	huso TINYINT NOT NULL,
 
 	CONSTRAINT ubicaciones_huso_intervalo
 	CHECK (-12 <= huso and huso <= 12),
@@ -118,13 +118,10 @@ CREATE TABLE instancias_vuelo (
 #--Tabla clases--
 CREATE TABLE clases (
 	nombre VARCHAR(45) NOT NULL,
-	porcentaje REAL NOT NULL,
+	porcentaje DECIMAL(2,2) NOT NULL,
 
 	CONSTRAINT pk_clases
-	PRIMARY KEY (nombre),
-
-	CONSTRAINT clases_porcentaje_intervalo
-	CHECK (0<=porcentaje and porcentaje<=0.99)
+	PRIMARY KEY (nombre)
 
 ) ENGINE=InnoDB;
 
