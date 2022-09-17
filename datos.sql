@@ -1,5 +1,3 @@
-\. vuelos.sql
-
 INSERT INTO ubicaciones VALUES ("Germany", "Brandeburgo", "Schönefeld", +2);
 INSERT INTO ubicaciones VALUES ("Argentina", "Buenos Aires", "Ezeiza", -3);
 INSERT INTO ubicaciones VALUES ("France", "Île-de-France", "Roissy-en-France", +2);
