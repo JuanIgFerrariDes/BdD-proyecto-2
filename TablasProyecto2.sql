@@ -11,7 +11,7 @@ CREATE TABLE pasajeros (
 
 CREATE TABLE empleados(
 	legajo INT UNSIGNED NOT NULL,
-	passward VARCHAR(32) NOT NULL,
+	password VARCHAR(32) NOT NULL,
 	doc_tipo VARCHAR(64) NOT NULL,	
 	doc_nro INT UNSIGNED NOT NULL,
 	apellido VARCHAR(64) NOT NULL,
