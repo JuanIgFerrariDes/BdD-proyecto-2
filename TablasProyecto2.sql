@@ -83,7 +83,7 @@ CREATE TABLE reserva_vuelo_clase(
 	numero INT UNSIGNED NOT NULL,
 	vuelo VARCHAR(45) NOT NULL,
 	fecha_vuelo DATE NOT NULL,
-	clase nombre VARCHAR(45) NOT NULL,
+	clase VARCHAR(45) NOT NULL,
 
 	CONSTRAINT FK_numero_rvc_reserva
 	FOREIGN KEY (numero) REFERENCES reservas(numero)
@@ -97,6 +97,11 @@ CREATE TABLE reserva_vuelo_clase(
 	FOREIGN KEY (fecha_vuelo) REFERENCES instancias_vuelo(fecha)
 		ON DELETE RESTRICT ON UPDATE CASCADE,
 
+	
+	CONSTRAINT FK_clase_nombre_brinda
+	FOREIGN KEY (clase) REFERENCES clases(nombre)
+		ON DELETE RESTRICT ON UPDATE CASCADE,
+	
 	KEY(numero, vuelo, fecha_vuelo)
 ) ENGINE=InnoDB;
 
