@@ -134,7 +134,7 @@ CREATE TABLE comodidades (
 
 ) ENGINE=InnoDB;
 
-
+#--Tabla Pasajeros--
 CREATE TABLE pasajeros (
     doc_tipo VARCHAR(45) NOT NULL,
     doc_nro INT UNSIGNED NOT NULL,
@@ -149,6 +149,7 @@ CREATE TABLE pasajeros (
 
 ) ENGINE=InnoDB;
 
+#--Tabla Empleados--
 CREATE TABLE empleados(
     legajo INT UNSIGNED NOT NULL,
     password VARCHAR(32) NOT NULL,
@@ -163,6 +164,7 @@ CREATE TABLE empleados(
     PRIMARY KEY (legajo)
 ) ENGINE=InnoDB;
 
+#--Tabla Reservas--
 CREATE TABLE reservas(
     numero INT UNSIGNED AUTO_INCREMENT NOT NULL,
     fecha DATE NOT NULL,
@@ -184,6 +186,7 @@ CREATE TABLE reservas(
     PRIMARY KEY (numero)
 ) ENGINE=InnoDB;
 
+#--Tabla Brinda--
 CREATE TABLE brinda (
     vuelo VARCHAR(10) NOT NULL,
     dia ENUM('Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa') NOT NULL,
@@ -204,7 +207,7 @@ CREATE TABLE brinda (
 
 ) ENGINE=InnoDB;
 
-
+#--Tabla Posee--
 CREATE TABLE posee(
     clase VARCHAR(20) NOT NULL,
     comodidad INT UNSIGNED NOT NULL,
@@ -222,6 +225,7 @@ CREATE TABLE posee(
     PRIMARY KEY(clase,comodidad)
 ) ENGINE=InnoDB;
 
+#--Tabla Reserva vuelo clase--
 CREATE TABLE reserva_vuelo_clase(
     numero INT UNSIGNED NOT NULL,
     vuelo VARCHAR(10) NOT NULL,
@@ -244,6 +248,7 @@ CREATE TABLE reserva_vuelo_clase(
     PRIMARY KEY(numero, vuelo, fecha_vuelo)
 ) ENGINE=InnoDB;
 
+#--Tabla Asientos reservadose--
 CREATE TABLE asientos_reservados(
     vuelo VARCHAR(10) NOT NULL,
     fecha DATE NOT NULL,
@@ -303,7 +308,8 @@ GRANT INSERT, UPDATE, DELETE ON vuelos.reserva_vuelo_clase TO 'empleado'@'%';
 # 
 CREATE VIEW vuelos_disponibles AS
 SELECT s.vuelo AS nro_vuelo, s.modelo_avion AS modelo, fecha, dia AS dia_sale,
-	hora_sale, hora_llega, SUBTIME(hora_llega, hora_sale) AS tiempo_estimado, 
+	hora_sale, hora_llega, 
+	IF(hora_llega<hora_sale, TIMEDIFF('24:00:00',TIMEDIFF(hora_sale, hora_llega)),TIMEDIFF(hora_llega, hora_sale)) AS tiempo_estimado, 
 	ASal.codigo AS codigo_aero_sale, ASal.nombre AS nombre_aero_sale, 
 	ASal.ciudad AS ciudad_sale, Asal.estado AS estado_sale, ASal.pais AS pais_sale,
 	ALle.codigo AS codigo_aero_llega,  ALle.nombre AS nombre_aero_llega,
